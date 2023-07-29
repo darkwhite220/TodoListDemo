@@ -42,6 +42,6 @@ class TodoAppState(
   }
   
   fun onBackClick() {
-    navController.popBackStack()
+    navController.navigateUp()
   }
 }

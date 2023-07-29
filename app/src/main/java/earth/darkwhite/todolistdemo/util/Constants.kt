@@ -6,4 +6,6 @@ object Constants {
   const val EDIT_ID = "edit_id"
   const val CREATE_ARG_ROUTE = "$CREATE_ROUTE/{$EDIT_ID}"
   const val EDIT_ID_DEFAULT_VALUE = -1
+  
+  const val MILLIS_IN_DAY = 86400000L
 }

@@ -2,7 +2,6 @@ package earth.darkwhite.todolistdemo.ui.screens.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import earth.darkwhite.todolistdemo.ui.screens.create.CreateScreenTopAppBar
 import earth.darkwhite.todolistdemo.ui.theme.TodoListDemoTheme
 
 
@@ -18,6 +17,6 @@ fun HomeScreenFabPreview() {
 @Composable
 fun HomeScreenTopAppBarPreview() {
   TodoListDemoTheme() {
-    CreateScreenTopAppBar {}
+    HomeScreenTopAppBar()
   }
 }

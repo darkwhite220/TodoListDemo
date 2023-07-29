@@ -1,7 +1,6 @@
 package earth.darkwhite.todolistdemo.ui.app
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,7 +15,6 @@ import earth.darkwhite.todolistdemo.util.Constants.CREATE_ARG_ROUTE
 import earth.darkwhite.todolistdemo.util.Constants.EDIT_ID
 import earth.darkwhite.todolistdemo.util.Constants.HOME_ROUTE
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TodoApp(
   appState: TodoAppState = rememberAppState()
@@ -35,7 +33,7 @@ fun TodoApp(
       }
       composable(
         route = CREATE_ARG_ROUTE,
-        arguments = listOf(navArgument(name = EDIT_ID) { type = NavType.IntType })
+        arguments = listOf(navArgument(name = EDIT_ID) { type = NavType.LongType })
       ) {
         CreateScreen(
           onBackClick = { appState.onBackClick() },

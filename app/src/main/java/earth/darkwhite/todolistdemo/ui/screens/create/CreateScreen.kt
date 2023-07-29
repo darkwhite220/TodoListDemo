@@ -1,57 +1,73 @@
 package earth.darkwhite.todolistdemo.ui.screens.create
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import earth.darkwhite.todolistdemo.database.Todo
+import earth.darkwhite.todolistdemo.model.Resource
+import earth.darkwhite.todolistdemo.ui.screens.create.component.CreateScreenFab
+import earth.darkwhite.todolistdemo.ui.screens.create.component.CreateScreenTopAppBar
+import earth.darkwhite.todolistdemo.ui.screens.create.component.CreateTaskContent
 
 @Composable
 fun CreateScreen(
   onBackClick: () -> Unit,
   viewModel: CreateViewModel
 ) {
+  val todo by viewModel.todo.collectAsStateWithLifecycle()
+  val dbResponse by viewModel.dbCreateDeleteResponse
+  
   CreateScreenContent(
+    todo = todo,
+    onCreateEvent = viewModel::onEvent,
     onBackClick = onBackClick
   )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun CreateScreenContent(
-  onBackClick: () -> Unit
-) {
-  Scaffold(
-    topBar = { CreateScreenTopAppBar(onClick = onBackClick) }
-  ) { innerPad ->
-    Column(modifier = Modifier.padding(innerPad)) {
+  
+  when (val response = dbResponse) {
+    Resource.Pending -> {}
+    is Resource.Failure -> {
+      Toast.makeText(LocalContext.current, response.e, Toast.LENGTH_SHORT).show()
+    }
     
+    is Resource.Success -> {
+      onBackClick()
     }
   }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateScreenTopAppBar(
-  onClick: () -> Unit
+fun CreateScreenContent(
+  todo: Todo,
+  onCreateEvent: (event: CreateEvent) -> Unit,
+  onBackClick: () -> Unit
 ) {
-  CenterAlignedTopAppBar(
-    title = { Text(text = "Create Screen") },
-    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
-    navigationIcon = {
-      IconButton(onClick = onClick) {
-        Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = null)
-      }
+  Scaffold(
+    topBar = {
+      CreateScreenTopAppBar(
+        onBackClick = onBackClick,
+        onCreateEvent = onCreateEvent
+      )
+    },
+    floatingActionButton = { CreateScreenFab(onCreateEvent) }
+  ) { innerPad ->
+    Column(
+      modifier = Modifier
+        .padding(innerPad)
+        .padding(8.dp)
+    ) {
+      CreateTaskContent(
+        todo = todo,
+        onCreateEvent = onCreateEvent
+      )
     }
-  )
+  }
 }
 
 

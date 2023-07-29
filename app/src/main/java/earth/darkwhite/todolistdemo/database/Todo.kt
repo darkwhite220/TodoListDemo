@@ -9,6 +9,6 @@ data class Todo(
   val index: Long = 0,
   val title: String,
   val description: String,
-  val done: Boolean,
-  val duoDate: Long
+  val isDone: Boolean,
+  val dueDate: Long
 )
