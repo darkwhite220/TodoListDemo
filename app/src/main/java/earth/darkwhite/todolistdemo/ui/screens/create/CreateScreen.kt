@@ -11,7 +11,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import earth.darkwhite.todolistdemo.database.Todo
 import earth.darkwhite.todolistdemo.model.Resource
-import earth.darkwhite.todolistdemo.ui.component.ProgressBar
 import earth.darkwhite.todolistdemo.ui.component.mediumPad
 import earth.darkwhite.todolistdemo.ui.screens.create.component.CreateScreenFab
 import earth.darkwhite.todolistdemo.ui.screens.create.component.CreateScreenTopAppBar
@@ -32,9 +31,7 @@ fun CreateScreen(
   )
   
   when (val response = dbResponse) {
-    Resource.Pending -> {
-      ProgressBar()
-    }
+    Resource.Pending -> {}
     
     is Resource.Failure -> {
       Toast.makeText(LocalContext.current, response.e, Toast.LENGTH_SHORT).show()

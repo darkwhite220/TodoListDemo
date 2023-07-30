@@ -31,17 +31,19 @@ fun HomeTodoItem(
       modifier = Modifier.fillMaxWidth()
     ) {
       Column(modifier = Modifier.padding(mediumPad)) {
-        Text(
-          text = title,
-          fontWeight = FontWeight.W600,
-          style = TextStyle(
-            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-            textDecoration = if (isDone) TextDecoration.LineThrough else TextDecoration.None
-          ),
-          overflow = TextOverflow.Ellipsis,
-          maxLines = 1
-        )
-        if (!isDone) {
+        if (title.isNotEmpty()){
+          Text(
+            text = title,
+            fontWeight = FontWeight.W600,
+            style = TextStyle(
+              fontSize = MaterialTheme.typography.titleMedium.fontSize,
+              textDecoration = if (isDone) TextDecoration.LineThrough else TextDecoration.None
+            ),
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1
+          )
+        }
+        if (!isDone && description.isNotEmpty()) {
           Text(
             text = description,
             style = TextStyle(fontSize = MaterialTheme.typography.bodyMedium.fontSize),
