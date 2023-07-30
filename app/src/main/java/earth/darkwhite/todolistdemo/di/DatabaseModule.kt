@@ -22,7 +22,9 @@ class DatabaseModule {
       context = context,
       klass = TodoDatabase::class.java,
       name = context.packageName
-    ).build()
+    )
+      .createFromAsset("todo_table.db")
+      .build()
   
   @Singleton
   @Provides
