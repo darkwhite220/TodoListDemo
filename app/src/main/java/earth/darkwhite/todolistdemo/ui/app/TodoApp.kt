@@ -12,7 +12,7 @@ import androidx.navigation.navArgument
 import earth.darkwhite.todolistdemo.ui.screens.create.CreateScreen
 import earth.darkwhite.todolistdemo.ui.screens.home.HomeScreen
 import earth.darkwhite.todolistdemo.util.Constants.CREATE_ARG_ROUTE
-import earth.darkwhite.todolistdemo.util.Constants.EDIT_ID
+import earth.darkwhite.todolistdemo.util.Constants.TODO_ITEM
 import earth.darkwhite.todolistdemo.util.Constants.HOME_ROUTE
 
 @Composable
@@ -28,12 +28,13 @@ fun TodoApp(
       composable(route = HOME_ROUTE) {
         HomeScreen(
           onFabClick = { appState.navigateToCreate() },
+          onItemClick = { todoId -> appState.navigateToCreate(todoId) },
           viewModel = hiltViewModel()
         )
       }
       composable(
         route = CREATE_ARG_ROUTE,
-        arguments = listOf(navArgument(name = EDIT_ID) { type = NavType.LongType })
+        arguments = listOf(navArgument(name = TODO_ITEM) { type = NavType.LongType })
       ) {
         CreateScreen(
           onBackClick = { appState.onBackClick() },

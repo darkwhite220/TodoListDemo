@@ -26,7 +26,7 @@ class TodoAppState(
   val navController: NavHostController
 ) {
   
-  fun navigateToCreate(todoId: Int = EDIT_ID_DEFAULT_VALUE) {
+  fun navigateToCreate(todoId: Long = EDIT_ID_DEFAULT_VALUE) {
     onNavigateClick("$CREATE_ROUTE/$todoId")
   }
   

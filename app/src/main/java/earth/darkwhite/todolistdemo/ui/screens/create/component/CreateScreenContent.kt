@@ -24,8 +24,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.unit.dp
 import earth.darkwhite.todolistdemo.database.Todo
+import earth.darkwhite.todolistdemo.ui.component.mediumPad
 import earth.darkwhite.todolistdemo.ui.screens.create.CreateEvent
 import earth.darkwhite.todolistdemo.util.Util
 import earth.darkwhite.todolistdemo.util.Util.dueDateFormatted
@@ -41,7 +41,7 @@ fun CreateTaskContent(
     OutlinedTextField(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(8.dp),
+        .padding(mediumPad),
       value = title,
       onValueChange = { onCreateEvent(CreateEvent.OnUpdateTitle(it)) },
       label = { Text(text = "Task title") },
@@ -55,7 +55,7 @@ fun CreateTaskContent(
     OutlinedTextField(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(8.dp),
+        .padding(mediumPad),
       value = description,
       onValueChange = { onCreateEvent(CreateEvent.OnUpdateDescription(it)) },
       label = { Text(text = "Task Description") },
@@ -74,12 +74,12 @@ fun CreateTaskContent(
     
     Row {
       Text(
-        modifier = Modifier.padding(8.dp),
+        modifier = Modifier.padding(mediumPad),
         text = "Due date:"
       )
       Text(
         modifier = Modifier
-          .padding(8.dp)
+          .padding(mediumPad)
           .clickable { displayDatePicker = true },
         text = dueDate.dueDateFormatted(),
         style = TextStyle(

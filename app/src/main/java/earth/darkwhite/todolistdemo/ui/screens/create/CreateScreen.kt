@@ -8,10 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import earth.darkwhite.todolistdemo.database.Todo
 import earth.darkwhite.todolistdemo.model.Resource
+import earth.darkwhite.todolistdemo.ui.component.ProgressBar
+import earth.darkwhite.todolistdemo.ui.component.mediumPad
 import earth.darkwhite.todolistdemo.ui.screens.create.component.CreateScreenFab
 import earth.darkwhite.todolistdemo.ui.screens.create.component.CreateScreenTopAppBar
 import earth.darkwhite.todolistdemo.ui.screens.create.component.CreateTaskContent
@@ -22,7 +23,7 @@ fun CreateScreen(
   viewModel: CreateViewModel
 ) {
   val todo by viewModel.todo.collectAsStateWithLifecycle()
-  val dbResponse by viewModel.dbCreateDeleteResponse
+  val dbResponse by viewModel.dbCUDResponse
   
   CreateScreenContent(
     todo = todo,
@@ -31,7 +32,10 @@ fun CreateScreen(
   )
   
   when (val response = dbResponse) {
-    Resource.Pending -> {}
+    Resource.Pending -> {
+      ProgressBar()
+    }
+    
     is Resource.Failure -> {
       Toast.makeText(LocalContext.current, response.e, Toast.LENGTH_SHORT).show()
     }
@@ -60,7 +64,7 @@ fun CreateScreenContent(
     Column(
       modifier = Modifier
         .padding(innerPad)
-        .padding(8.dp)
+        .padding(mediumPad)
     ) {
       CreateTaskContent(
         todo = todo,
