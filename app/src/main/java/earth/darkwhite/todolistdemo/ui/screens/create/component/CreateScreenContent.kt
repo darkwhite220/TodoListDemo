@@ -93,7 +93,7 @@ fun CreateTaskContent(
         checked = isDone,
         onCheckedChange = { onCreateEvent(CreateEvent.OnUpdateIsDone(it)) }
       )
-      Text(text = "Important task")
+      Text(text = "Task done")
     }
     
     if (displayDatePicker) {
